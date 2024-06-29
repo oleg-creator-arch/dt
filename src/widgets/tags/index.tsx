@@ -1,3 +1,4 @@
+import './tags.scss';
 import { ReactComponent as IconSquare } from '@/shared/img/square.svg';
 import { ReactComponent as IconBedroom } from '@/shared/img/bedroom.svg';
 import { ReactComponent as IconStairs } from '@/shared/img/stairs.svg';
