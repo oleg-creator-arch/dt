@@ -9,7 +9,7 @@ import { Outlet } from 'react-router-dom';
 
 interface IDefaultLayoutProps {}
 
-const DefaultLayout: React.FC<any> = ({}: IDefaultLayoutProps) => {
+const DefaultLayout: React.FC<IDefaultLayoutProps> = ({}: IDefaultLayoutProps) => {
   // const stateModal = useSelector(getFormModal);
 
   return (

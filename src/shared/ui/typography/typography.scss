@@ -1,5 +1,8 @@
+$base-font-family: 'PT Sans', sans-serif;
+$display-font-family: 'PT Serif', serif;
+
 .display-2xl {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 230px;
   font-style: normal;
   font-weight: 400;
@@ -8,7 +11,7 @@
 }
 
 .display-xl {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 80px;
   font-style: normal;
   font-weight: 400;
@@ -17,25 +20,27 @@
   text-transform: uppercase;
 }
 .display-sm {
-  font-family: "PT Serif";
-  font-size: 32px;
+  font-family: $display-font-family;
+  font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 42px;
   margin: 0px;
 }
 .display-2xs {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 37px;
 }
 .display-md {
-  font-size: 44px;
+  font-family: $display-font-family;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: normal;
+  margin: 0px;
 }
 .display-xs {
   font-size: 28px;
@@ -45,7 +50,7 @@
   margin: 0px;
 }
 .display-lg {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 62px;
   font-style: normal;
   font-weight: 400;
@@ -54,6 +59,7 @@
   text-transform: uppercase;
 }
 .text-md {
+  font-family: $base-font-family;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -62,7 +68,7 @@
   text-align: start;
 }
 .text-lg {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -70,7 +76,7 @@
   letter-spacing: 0.32px;
 }
 .text-2xl {
-  font-family: "PT Serif";
+  font-family: 'PT Serif';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

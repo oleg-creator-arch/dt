@@ -1,47 +1,72 @@
-.home-container {
-  margin-top: 180px;
-  display: grid;
-  grid-template-rows: auto auto;
-  justify-items: center;
+@mixin step2v2($width, $color, $bgcolor) {
+  box-shadow:
+    $width 0 $bgcolor,
+    -$width 0 $bgcolor,
+    0 (-$width) $bgcolor,
+    0 $width $bgcolor,
+    2 * $width 0 $color,
+    -2 * $width 0 $color,
+    0 (-2 * $width) $color,
+    0 2 * $width $color,
+    0 0 0 $width $color;
+  margin: 2 * $width auto;
 }
 
-.empty-favorite-container {
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  border-radius: 10px;
-  display: flex;
-  direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-  box-sizing: border-box;
-}
-.info-about-empty-favorite {
-  text-align: center;
-  width: 250px;
-  height: 250px;
-  border-radius: 10px;
-  background-color: #fff;
-  display: flex;
-  direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 50px;
-}
-.choose-country {
-  text-align: center;
-  width: 133px;
-  height: 41px;
-  flex-shrink: 0;
-  border: none;
-  border-radius: 15px;
-  background: #d9d9d9;
-  padding: 6px 30px 7px 29px;
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 33.33px;
-  cursor: pointer;
+@media (max-width: 415px) {
+  .flat-page {
+    .content {
+      display: grid;
+      gap: 10px;
+      margin: 0px 10px 160px 10px;
+      .tags {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+      }
+      .address {
+        display: flex;
+        align-items: center;
+        height: 18px;
+        a {
+          text-decoration: none;
+        }
+      }
+      .description {
+        text-align: justify;
+      }
+      .headline {
+        margin-top: 15px;
+      }
+    }
+    .phone {
+      position: fixed;
+      width: 90%;
+      min-width: 240px;
+      max-width: 380px;
+      height: 40px;
+      padding: 10px 10px 0px 10px;
+      white-space: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      box-sizing: content-box;
+      bottom: 50px;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      a:active,
+      a:hover,
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      // @include step2v2(4px, rgb(129, 129, 220), white);
+      // background-color: white;
+      border-radius: 23px;
+      background-color: #d9d9d9;
+      text-align: center;
+    }
+    .phone::-webkit-scrollbar {
+      width: 0;
+    }
+  }
 }

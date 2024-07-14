@@ -16,11 +16,15 @@
     "copy-to-clipboard": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
     "react-router-dom": "6.6.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "sass": "^1.69.5",
+    "swiper": "^11.1.4",
     "typescript": "^4.4.2",
+    "uuid": "^10.0.0",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

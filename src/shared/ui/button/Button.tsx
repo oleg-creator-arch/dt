@@ -1,9 +1,9 @@
-import React, { Ref } from "react";
-import "./button.scss";
-import cn from "classnames";
-type ButtonTypes = "submit" | "reset";
-type ButtonSizes = "lg" | "md" | "sm";
-type type = "primary" | "outline";
+import React, { Ref } from 'react';
+import './button.scss';
+import cn from 'classnames';
+type ButtonTypes = 'submit' | 'reset';
+type ButtonSizes = 'lg' | 'md' | 'sm';
+type type = 'primary' | 'outline';
 
 interface IButtonProps {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ export const Button: React.FC<IButtonProps> = ({
   return (
     <button
       type={ButtonType}
-      className={cn("button", `button_${type}`, `button_${size}`, className)}
+      className={cn('button', `button_${type}`, `button_${size}`, className)}
       onClick={onClick}
       disabled={disabled}
       form={form}

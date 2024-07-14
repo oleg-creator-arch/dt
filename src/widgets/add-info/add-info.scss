@@ -1,0 +1,37 @@
+$fill: 1;
+$not-fill: 0.27;
+@media (max-width: 415px) {
+  .add-info-widget {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    .add-info {
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
+      svg {
+        fill-opacity: $not-fill;
+        path {
+          fill-opacity: $not-fill;
+          stroke-opacity: $not-fill;
+        }
+      }
+      span {
+        opacity: $not-fill;
+      }
+    }
+    .active {
+      @extend .add-info;
+      svg {
+        fill-opacity: $fill;
+        path {
+          fill-opacity: $fill;
+          stroke-opacity: $fill;
+        }
+      }
+      span {
+        opacity: $fill;
+      }
+    }
+  }
+}

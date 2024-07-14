@@ -11,7 +11,7 @@ interface ITagsProps {
   data: string;
 }
 
-const Tags: React.FC<any> = ({ variant, data }: ITagsProps) => {
+const Tags: React.FC<ITagsProps> = ({ variant, data }: ITagsProps) => {
   return (
     <div className="tags-widget">
       <div className="icon">
@@ -24,7 +24,9 @@ const Tags: React.FC<any> = ({ variant, data }: ITagsProps) => {
         )}
       </div>
       <div className="data">
-        {data}{' '}
+        <Typography type="text-md" isUnSelectable={true}>
+          {data}
+        </Typography>{' '}
         {variant === 'IconSquare' ? (
           <Typography type="text-md" isUnSelectable={true}>
             м<sup>2</sup>
