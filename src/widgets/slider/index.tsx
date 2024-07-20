@@ -132,44 +132,44 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
             </SwiperSlide>
           ))}
         </div>
-        <div
-          className={cn('fullscreen-overlay', { active: isFullscreen })}
-          onClick={handleCloseFullscreen}
-        >
+        <TransformWrapper>
           <div
-            className={cn('fullscreen-container', { active: isFullscreen })}
-            onClick={(e) => e.stopPropagation()}
+            className={cn('fullscreen-overlay', { active: isFullscreen })}
+            onClick={handleCloseFullscreen}
           >
-            <TransformWrapper>
+            <div
+              className={cn('fullscreen-container', { active: isFullscreen })}
+              onClick={(e) => e.stopPropagation()}
+            >
               <TransformComponent>
                 <img src={selectedImage} alt="Fullscreen" className="fullscreen-image" />
               </TransformComponent>
-            </TransformWrapper>
-            <Button type="outline" className="close-button" onClick={handleCloseFullscreen}>
-              <AiOutlineClose color="white" />
-            </Button>
+              <Button type="outline" className="close-button" onClick={handleCloseFullscreen}>
+                <AiOutlineClose color="white" />
+              </Button>
+            </div>
+            <button
+              className={cn('prev-button', { active: selectedIndex === 0 ? false : true })}
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
+                PrevImageClick();
+              }}
+            >
+              <GrPrevious />
+            </button>
+            <button
+              className={cn('next-button', {
+                active: selectedIndex === urlPhotos.length - 1 ? false : true,
+              })}
+              onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
+                NextImageClick();
+              }}
+            >
+              <GrNext />
+            </button>
           </div>
-          <button
-            className={cn('prev-button', { active: selectedIndex === 0 ? false : true })}
-            onClick={(e: MouseEvent<HTMLButtonElement>) => {
-              e.stopPropagation();
-              PrevImageClick();
-            }}
-          >
-            <GrPrevious />
-          </button>
-          <button
-            className={cn('next-button', {
-              active: selectedIndex === urlPhotos.length - 1 ? false : true,
-            })}
-            onClick={(e: MouseEvent<HTMLButtonElement>) => {
-              e.stopPropagation();
-              NextImageClick();
-            }}
-          >
-            <GrNext />
-          </button>
-        </div>
+        </TransformWrapper>
         <div onClick={PrevImageClick}>
           <SwiperPrevButton>
             <GrPrevious />
