@@ -95,6 +95,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
     setSelectedIndex(index);
     setSelectedImage(image);
     setIsFullscreen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const NextImageClick = () => {
@@ -118,6 +119,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
   const handleCloseFullscreen = () => {
     setIsFullscreen(false);
     setSelectedImage('');
+    document.body.style.overflow = 'scroll';
   };
 
   return (
