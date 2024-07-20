@@ -35,29 +35,30 @@ const SwiperSlideToButton = ({ index, children }: ISwiperSlideToButtonProps) => 
   );
 };
 
-const SwiperNextButton = ({ children, className, isActive }: ISwiperButtonProps) => {
+const SwiperNextButton = ({ children, className }: ISwiperButtonProps) => {
   const swiper = useSwiper();
-  console.log('isActive next', !swiper.isEnd);
-
+  const [isActive, setIsActive] = useState<boolean>(!swiper.isEnd);
+  swiper.on('slideChange', function () {
+    setIsActive(!swiper.isEnd);
+  });
   return (
-    <div
-      className={cn('next-swiper', { active: !swiper.isEnd })}
-      onClick={() => swiper.slideNext()}
-    >
+    <div className={cn('next-swiper', { active: isActive })} onClick={() => swiper.slideNext()}>
       <Button type={'outline'}>{children}</Button>
     </div>
   );
 };
 
-const SwiperPrevButton = ({ children, className, isActive }: ISwiperButtonProps) => {
+const SwiperPrevButton = ({ children, className }: ISwiperButtonProps) => {
   const swiper = useSwiper();
+  const [isActive, setIsActive] = useState<boolean>(!swiper.isBeginning);
   console.log('isActive prev', !swiper.isBeginning);
-
+  swiper.on('slideChange', function () {
+    console.log('isActivewwpre', isActive);
+    setIsActive(!swiper.isBeginning);
+  });
+  console.log('isActivewwpre2', isActive);
   return (
-    <div
-      className={cn('prev-swiper', { active: !swiper.isBeginning })}
-      onClick={() => swiper.slidePrev()}
-    >
+    <div className={cn('prev-swiper', { active: isActive })} onClick={() => swiper.slidePrev()}>
       <Button type={'outline'}>{children}</Button>
     </div>
   );
@@ -114,7 +115,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
         }}
         autoHeight={true}
         mousewheel={true}
-        modules={[Navigation, Controller]}
+        modules={[Navigation, Controller, Mousewheel, Scrollbar]}
         className="mySwiper"
       >
         <div className="image-grid">
