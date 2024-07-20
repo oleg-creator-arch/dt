@@ -6,14 +6,6 @@ body {
   font-family: 'Inter', sans-serif;
   font-style: normal;
   line-height: normal;
-  overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 code {

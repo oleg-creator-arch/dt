@@ -15,6 +15,7 @@ import { Scrollbar, Navigation, Controller, Mousewheel } from 'swiper/modules';
 import { Button } from '@/shared/ui';
 import cn from 'classnames';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import useScrollbarSize from 'react-scrollbar-size';
 
 interface ISwiperButtonProps {
   children: React.ReactNode;
@@ -91,11 +92,15 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
+  const scrollbarSize = useScrollbarSize();
+  console.log('scrollbarSize', scrollbarSize.width);
+
   const handleImageClick = (image: string, index: number) => {
     setSelectedIndex(index);
     setSelectedImage(image);
     setIsFullscreen(true);
     document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${scrollbarSize.width}px`;
   };
 
   const NextImageClick = () => {
@@ -119,7 +124,8 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
   const handleCloseFullscreen = () => {
     setIsFullscreen(false);
     setSelectedImage('');
-    document.body.style.overflow = 'scroll';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   };
 
   return (
