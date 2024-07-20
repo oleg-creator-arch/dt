@@ -43,6 +43,14 @@ const SwiperNextButton = ({ children, className }: ISwiperButtonProps) => {
   swiper.on('slideChange', function () {
     setIsActive(!swiper.isEnd);
   });
+  swiper.on('sliderMove', function () {
+    console.log('isAdad', isActive);
+    setIsActive(!swiper.isEnd);
+  });
+  swiper.on('reachEnd', function () {
+    console.log('qweisAwwwdad', isActive);
+    setIsActive(false);
+  });
   return (
     <div className={cn('next-swiper', { active: isActive })} onClick={() => swiper.slideNext()}>
       <Button type={'outline'}>{children}</Button>
@@ -58,13 +66,13 @@ const SwiperPrevButton = ({ children, className }: ISwiperButtonProps) => {
     console.log('isActivewwpre', isActive);
     setIsActive(!swiper.isBeginning);
   });
-  swiper.on('sliderFirstMove', function () {
+  swiper.on('sliderMove', function () {
     console.log('isAdad', isActive);
-    setIsActive(swiper.isBeginning);
-  });
-  swiper.on('beforeTransitionStart', function () {
-    console.log('isAwwwdad', isActive);
     setIsActive(!swiper.isBeginning);
+  });
+  swiper.on('reachBeginning', function () {
+    console.log('qweisAwwwdad', isActive);
+    setIsActive(false);
   });
   console.log('isActivewwpre2', isActive);
   return (
