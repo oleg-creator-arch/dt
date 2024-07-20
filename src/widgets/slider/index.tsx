@@ -107,7 +107,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
   return (
     <div className="swiper-container">
       <Swiper
-        slidesPerView={'auto'}
+        // slidesPerView={'auto'}
         spaceBetween={10}
         centeredSlides={true}
         centeredSlidesBounds={true}
