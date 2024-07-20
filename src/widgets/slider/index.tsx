@@ -58,6 +58,14 @@ const SwiperPrevButton = ({ children, className }: ISwiperButtonProps) => {
     console.log('isActivewwpre', isActive);
     setIsActive(!swiper.isBeginning);
   });
+  swiper.on('sliderFirstMove', function () {
+    console.log('isAdad', isActive);
+    setIsActive(swiper.isBeginning);
+  });
+  swiper.on('beforeTransitionStart', function () {
+    console.log('isAwwwdad', isActive);
+    setIsActive(!swiper.isBeginning);
+  });
   console.log('isActivewwpre2', isActive);
   return (
     <div className={cn('prev-swiper', { active: isActive })} onClick={() => swiper.slidePrev()}>

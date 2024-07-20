@@ -61,6 +61,7 @@
 .fullscreen-overlay.active {
   visibility: visible;
   position: fixed;
+  overflow-y: hidden;
   top: 0;
   left: 0;
   width: 100%;
