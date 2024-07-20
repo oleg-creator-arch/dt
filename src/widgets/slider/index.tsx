@@ -13,6 +13,7 @@ import './styles.scss';
 import { Scrollbar, Navigation, Controller, Mousewheel } from 'swiper/modules';
 import { Button } from '@/shared/ui';
 import cn from 'classnames';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 interface ISwiperButtonProps {
   children: React.ReactNode;
@@ -139,7 +140,11 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
             className={cn('fullscreen-container', { active: isFullscreen })}
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={selectedImage} alt="Fullscreen" className="fullscreen-image" />
+            <TransformWrapper>
+              <TransformComponent>
+                <img src={selectedImage} alt="Fullscreen" className="fullscreen-image" />
+              </TransformComponent>
+            </TransformWrapper>
             <Button type="outline" className="close-button" onClick={handleCloseFullscreen}>
               <AiOutlineClose color="white" />
             </Button>
