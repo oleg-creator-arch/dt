@@ -56,7 +56,7 @@
 
 .fullscreen-overlay {
   visibility: hidden;
-  position: absolute;
+  position: fixed;
 }
 .fullscreen-overlay.active {
   visibility: visible;
