@@ -1,7 +1,8 @@
 import React, { MouseEvent, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import { RxUpdate } from 'react-icons/rx';
 
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
@@ -107,7 +108,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
     <div className="swiper-container">
       <Swiper
         slidesPerView={'auto'}
-        spaceBetween={20}
+        spaceBetween={10}
         centeredSlides={true}
         centeredSlidesBounds={true}
         navigation={true}
@@ -137,17 +138,32 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
           onClick={handleCloseFullscreen}
         >
           <TransformWrapper>
-            <div
-              className={cn('fullscreen-container', { active: isFullscreen })}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <TransformComponent>
-                <img src={selectedImage} alt="Fullscreen" className="fullscreen-image" />
-              </TransformComponent>
-              <Button type="outline" className="close-button" onClick={handleCloseFullscreen}>
-                <AiOutlineClose color="white" />
-              </Button>
-            </div>
+            {({ zoomIn, zoomOut, resetTransform }) => (
+              <div
+                className={cn('fullscreen-container', { active: isFullscreen })}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <TransformComponent>
+                  <img src={selectedImage} alt="Fullscreen" className="fullscreen-image" />
+                </TransformComponent>
+                <Button type="outline" className="close-button" onClick={handleCloseFullscreen}>
+                  <AiOutlineClose color="white" />
+                </Button>
+                <Button type="outline" className="scale-plus-button" onClick={() => zoomIn()}>
+                  <AiOutlinePlus color="white" />
+                </Button>
+                <Button type="outline" className="scale-minus-button" onClick={() => zoomOut()}>
+                  <AiOutlineMinus color="white" />
+                </Button>
+                <Button
+                  type="outline"
+                  className="scale-reset-button"
+                  onClick={() => resetTransform()}
+                >
+                  <RxUpdate />
+                </Button>
+              </div>
+            )}
           </TransformWrapper>
           <button
             className={cn('prev-button', { active: selectedIndex === 0 ? false : true })}
