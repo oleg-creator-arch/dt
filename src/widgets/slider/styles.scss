@@ -198,15 +198,16 @@
 }
 
 .prev-swiper {
-  // visibility: hidden;
   display: none;
+}
+.prev-swiper.active {
+  display: block;
   position: absolute;
   top: 0px;
   left: 0px;
   z-index: 99;
   width: 60px;
   height: 450px;
-  background-color: #00000040;
   button {
     position: relative;
     top: 50%;
@@ -220,9 +221,8 @@
   }
 }
 
-.prev-swiper.active {
+.swiper-button-prev {
   display: block;
-  // visibility: visible;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -242,31 +242,36 @@
     }
   }
 }
-.next-swiper {
-  // visibility: hidden;
+.swiper-button-prev.swiper-button-disabled {
   display: none;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  z-index: 99;
-  width: 60px;
-  height: 450px;
-  background-color: #00000040;
-  button {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    svg {
-      color: #ffffff;
-      width: 25px;
-      height: 25px;
-    }
-  }
+}
+
+.next-swiper {
+  display: none;
 }
 
 .next-swiper.active {
-  // visibility: visible;
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 99;
+  width: 60px;
+  height: 450px;
+  button {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    svg {
+      color: #ffffff;
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+.swiper-button-next {
   display: block;
   position: absolute;
   top: 0px;
@@ -286,4 +291,8 @@
       height: 25px;
     }
   }
+}
+
+.swiper-button-next.swiper-button-disabled {
+  display: none;
 }

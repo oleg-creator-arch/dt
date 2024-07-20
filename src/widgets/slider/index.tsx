@@ -13,13 +13,13 @@ import './styles.scss';
 import { Scrollbar, Navigation, Controller, Mousewheel } from 'swiper/modules';
 import { Button } from '@/shared/ui';
 import cn from 'classnames';
-import { url } from 'inspector';
 
 interface ISwiperButtonProps {
   children: React.ReactNode;
   isActive?: boolean;
   length?: number;
   className?: string | string[];
+  onClick?: () => void;
 }
 
 interface ISwiperSlideToButtonProps extends ISwiperButtonProps {
@@ -37,12 +37,11 @@ const SwiperSlideToButton = ({ index, children }: ISwiperSlideToButtonProps) => 
 
 const SwiperNextButton = ({ children, className, isActive }: ISwiperButtonProps) => {
   const swiper = useSwiper();
-  console.log('isActive Nex', isActive);
+  console.log('isActive next', !swiper.isEnd);
 
-  // const isActive = length === swiper.activeIndex ? false : true;
   return (
     <div
-      className={cn('next-swiper', { active: isActive }, className)}
+      className={cn('next-swiper', { active: !swiper.isEnd })}
       onClick={() => swiper.slideNext()}
     >
       <Button type={'outline'}>{children}</Button>
@@ -52,12 +51,11 @@ const SwiperNextButton = ({ children, className, isActive }: ISwiperButtonProps)
 
 const SwiperPrevButton = ({ children, className, isActive }: ISwiperButtonProps) => {
   const swiper = useSwiper();
-  console.log('isActive prev', isActive);
-  // console.log('swiper.activeIndex', swiper.activeIndex);
-  // let isActive = 0 === swiper.activeIndex ? false : true;
+  console.log('isActive prev', !swiper.isBeginning);
+
   return (
     <div
-      className={cn('prev-swiper', { active: isActive }, className)}
+      className={cn('prev-swiper', { active: !swiper.isBeginning })}
       onClick={() => swiper.slidePrev()}
     >
       <Button type={'outline'}>{children}</Button>
@@ -73,87 +71,36 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [isActivePrevSwiper, setIsActivePrevSwiper] = useState<boolean>(false);
-  const [isActiveNextSwiper, setIsActiveNextSwiper] = useState<boolean>(true);
-  const [isActivePrev, setIsActivePrev] = useState<boolean>(false);
-  const [isActiveNext, setIsActiveNext] = useState<boolean>(true);
 
   const handleImageClick = (image: string, index: number) => {
-    console.log('set index', index);
     setSelectedIndex(index);
-    if (index > 0) {
-      setIsActivePrevSwiper(true);
-      setIsActivePrev(true);
-    }
-    if (index <= 0) {
-      setIsActivePrevSwiper(false);
-      setIsActivePrev(false);
-    }
-    if (index > urlPhotos.length - 1) {
-      setIsActiveNextSwiper(false);
-      setIsActiveNext(false);
-    }
-    if (index <= urlPhotos.length) {
-      setIsActiveNextSwiper(true);
-      setIsActiveNext(true);
-    }
     setSelectedImage(image);
     setIsFullscreen(true);
   };
 
-  const NextImageClickSwiper = () => {
-    if (selectedIndex + 1 < urlPhotos.length - 1) {
-      if (selectedIndex + 1 > 0) setIsActivePrevSwiper(true);
-      setIsActiveNextSwiper(true);
-      setSelectedIndex(selectedIndex + 1);
-    } else {
-      setIsActiveNextSwiper(false);
-      setIsActivePrevSwiper(true);
-    }
-  };
-  const PrevImageClickSwiper = () => {
-    if (selectedIndex > 0) {
-      setIsActivePrevSwiper(true);
-      if (selectedIndex === 0) setIsActivePrevSwiper(false);
-      setSelectedIndex(selectedIndex - 1);
-      console.log('prev2', isActivePrevSwiper);
-    } else {
-      setIsActivePrevSwiper(false);
-      setIsActiveNextSwiper(true);
-    }
-  };
-
   const NextImageClick = () => {
-    if (selectedIndex < urlPhotos.length) {
-      setSelectedImage(urlPhotos[selectedIndex + 1]);
-      if (selectedIndex + 1 > 0) setIsActivePrev(true);
-      setIsActiveNext(true);
-      setSelectedIndex(selectedIndex + 1);
+    if (selectedIndex === urlPhotos.length - 1) {
+      setSelectedIndex(selectedIndex);
     } else {
-      setIsActiveNext(false);
-      setIsActivePrev(true);
+      setSelectedImage(urlPhotos[selectedIndex + 1]);
+      setSelectedIndex(selectedIndex + 1);
     }
   };
-  const PrevImageClick = () => {
-    console.log('selectedIndex', selectedIndex);
 
-    if (selectedIndex > 0) {
-      setSelectedImage(urlPhotos[selectedIndex - 1]);
-      console.log('selectedIndex2', selectedIndex);
-      if (selectedIndex - 1 === 0) setIsActivePrev(false);
-      setSelectedIndex(selectedIndex - 1);
-      console.log('prev2', isActivePrevSwiper);
+  const PrevImageClick = () => {
+    if (selectedIndex === 0) {
+      setSelectedIndex(selectedIndex);
     } else {
-      setIsActivePrev(false);
-      setIsActiveNext(true);
+      setSelectedImage(urlPhotos[selectedIndex - 1]);
+      setSelectedIndex(selectedIndex - 1);
     }
   };
 
   const handleCloseFullscreen = () => {
-    // setSelectedIndex(0);
     setIsFullscreen(false);
     setSelectedImage('');
   };
+
   return (
     <div className="swiper-container">
       <Swiper
@@ -197,7 +144,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
             </Button>
           </div>
           <button
-            className={cn('prev-button', { active: isActivePrev })}
+            className={cn('prev-button', { active: selectedIndex === 0 ? false : true })}
             onClick={(e: MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               PrevImageClick();
@@ -206,7 +153,9 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
             <GrPrevious />
           </button>
           <button
-            className={cn('next-button', { active: isActiveNext })}
+            className={cn('next-button', {
+              active: selectedIndex === urlPhotos.length - 1 ? false : true,
+            })}
             onClick={(e: MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               NextImageClick();
@@ -215,21 +164,23 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
             <GrNext />
           </button>
         </div>
-        <div onClick={PrevImageClickSwiper}>
-          <SwiperPrevButton isActive={isActivePrevSwiper}>
+        <div onClick={PrevImageClick}>
+          <SwiperPrevButton>
             <GrPrevious />
           </SwiperPrevButton>
         </div>
-        <div onClick={NextImageClickSwiper}>
-          <SwiperNextButton isActive={isActiveNextSwiper}>
+        <div onClick={NextImageClick}>
+          <SwiperNextButton>
             <GrNext />
           </SwiperNextButton>
         </div>
         <div className="nav-swiper">
           {urlPhotos.map((urlPhoto, i) => (
-            <SwiperSlideToButton index={i} key={uuidv4()}>
-              <img src={urlPhoto} alt="photo room" key={uuidv4()} />
-            </SwiperSlideToButton>
+            <div onClick={() => setSelectedIndex(i)} key={uuidv4()}>
+              <SwiperSlideToButton index={i} key={uuidv4()}>
+                <img src={urlPhoto} alt="photo room" key={uuidv4()} />
+              </SwiperSlideToButton>
+            </div>
           ))}
         </div>
       </Swiper>
