@@ -114,7 +114,7 @@ const Slider: React.FC<ISliderProps> = ({ urlPhotos }: ISliderProps) => {
         }}
         autoHeight={true}
         mousewheel={true}
-        modules={[Scrollbar, Navigation, Controller, Mousewheel]}
+        modules={[Navigation, Controller]}
         className="mySwiper"
       >
         <div className="image-grid">
